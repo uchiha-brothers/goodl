@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let allNotifications = []; // Untuk menyimpan semua notifikasi dari JSON
 
     // --- Fungsi Utilitas ---
-    const showToast = (message, type = 'info', title = 'Notifikasi') => {
+    const showToast = (message, type = 'info', title = 'Notification') => {
         if (!DOM.notificationToast) return;
         const toastBody = DOM.notificationToast.querySelector('.toast-body');
         const toastTitleEl = DOM.notificationToast.querySelector('.toast-title');
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loadNotifications = async () => {
         try {
             const response = await fetch('/notifications.json'); 
-            if (!response.ok) throw new Error(`Gagal memuat notifikasi: ${response.status}`);
+            if (!response.ok) throw new Error(`Failed to load notification: ${response.status}`);
             allNotifications = await response.json();
             updateNotificationBadge();
         } catch (error) {
@@ -148,10 +148,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (unreadNotifications.length > 0) {
             DOM.notificationBadge.classList.add('active');
-            DOM.notificationBell.setAttribute('aria-label', `Notifikasi (${unreadNotifications.length} belum dibaca)`);
+            DOM.notificationBell.setAttribute('aria-label', `Notification (${unreadNotifications.length} unread)`);
         } else {
             DOM.notificationBadge.classList.remove('active');
-            DOM.notificationBell.setAttribute('aria-label', 'Tidak ada notifikasi baru');
+            DOM.notificationBell.setAttribute('aria-label', 'No new notifications');
         }
     };
 
@@ -168,11 +168,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (notificationsToShow.length > 0) {
             notificationsToShow.forEach(notif => {
-                showToast(notif.message, 'notification', `Notifikasi (${new Date(notif.date).toLocaleDateString('id-ID')})`);
+                showToast(notif.message, 'notification', `Notification (${new Date(notif.date).toLocaleDateString('id-ID')})`);
                 addSessionReadNotificationId(notif.id); 
             });
         } else {
-            showToast('Tidak ada notifikasi baru saat ini.', 'info');
+            showToast('Join @oggy_workshop on telegram.', 'info');
         }
         
         updateNotificationBadge(); 
@@ -188,15 +188,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         try {
             const response = await fetch('/src/settings.json');
-            if (!response.ok) throw new Error(`Gagal memuat pengaturan: ${response.status}`);
+            if (!response.ok) throw new Error(`Failed to load settings: ${response.status}`);
             settings = await response.json();
             populatePageContent();
             renderApiCategories();
             observeApiItems();
         } catch (error) {
             console.error('Error loading settings:', error);
-            showToast(`Gagal memuat pengaturan: ${error.message}`, 'error');
-            displayErrorState("Tidak dapat memuat konfigurasi API.");
+            showToast(`Failed to load settings: ${error.message}`, 'error');
+            displayErrorState("Unable to load API configuration.");
         } finally {
             hideLoadingScreen();
         }
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         DOM.body.classList.toggle('dark-mode');
         const isDarkMode = DOM.body.classList.contains('dark-mode');
         localStorage.setItem('darkMode', isDarkMode);
-        showToast(`Beralih ke mode ${isDarkMode ? 'gelap' : 'terang'}`, 'success');
+        showToast(`Switch to mode ${isDarkMode ? 'dark' : 'bright'}`, 'success');
     };
 
     // --- Manajemen Navigasi Samping ---
@@ -343,15 +343,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!settings || Object.keys(settings).length === 0) return;
 
         const currentYear = new Date().getFullYear();
-        const creator = settings.apiSettings?.creator || 'FlowFalcon';
+        const creator = settings.apiSettings?.creator || 'JerryCoder';
 
-        setPageContent(DOM.pageTitle, settings.name, "Falcon API");
-        setPageContent(DOM.wm, `© ${currentYear} ${creator}. Semua hak dilindungi.`);
-        setPageContent(DOM.appName, settings.name, "Falcon API");
+        setPageContent(DOM.pageTitle, settings.name, "JerryCoder API");
+        setPageContent(DOM.wm, `© ${currentYear} ${creator}. All rights reserved.`);
+        setPageContent(DOM.appName, settings.name, "JerryCoder API");
         setPageContent(DOM.sideNavName, settings.name || "API");
-        setPageContent(DOM.versionBadge, settings.version, "v1.0");
-        setPageContent(DOM.versionHeaderBadge, settings.header?.status, "Aktif!");
-        setPageContent(DOM.appDescription, settings.description, "Dokumentasi API simpel dan mudah digunakan.");
+        setPageContent(DOM.versionBadge, settings.version, "v3.2");
+        setPageContent(DOM.versionHeaderBadge, settings.header?.status, "Active!");
+        setPageContent(DOM.appDescription, settings.description, "Simple and easy to use API documentation.");
 
         // Mengatur gambar banner
         if (DOM.dynamicImage) {
@@ -369,13 +369,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 DOM.dynamicImage.src = '/src/banner.jpg'; // Fallback jika error loading
                 DOM.dynamicImage.alt = "API Banner Fallback";
                 DOM.dynamicImage.style.display = ''; // Pastikan tetap tampil
-                showToast('Gagal memuat gambar banner, menggunakan gambar default.', 'warning');
+                showToast('Failed to load banner image, using default image.', 'warning');
             };
         }
         
         if (DOM.apiLinksContainer) {
             DOM.apiLinksContainer.innerHTML = ''; 
-            const defaultLinks = [{ url: "https://github.com/FlowFalcon/Falcon-Api-UI", name: "Lihat di GitHub", icon: "fab fa-github" }];
+            const defaultLinks = [{ url: "https://t.me/oggy_workshop", name: "Join Telegram Channel", icon: "fab fa-github" }];
             const linksToRender = settings.links?.length ? settings.links : defaultLinks;
 
             linksToRender.forEach(({ url, name, icon }, index) => {
