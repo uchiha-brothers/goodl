@@ -1,16 +1,14 @@
 const axios = require('axios');
 
 module.exports = function(app) {
-    // TTS fetcher using your custom textvideo endpoint
     async function fetchTTS(text, lang = 'en') {
         const url = `https://jerrycoder.oggyapi.workers.dev/textvideo?text=${encodeURIComponent(text)}&lang=${lang}`;
-        const { data } = await axios.get(url, {
-            responseType: 'arraybuffer' // To handle audio stream (if needed)
+        const { data, headers } = await axios.get(url, {
+            responseType: 'stream'
         });
-        return data;
+        return { stream: data, headers };
     }
 
-    // Route: /ai/tts
     app.get('/ai/tts', async (req, res) => {
         try {
             const { text, lang } = req.query;
@@ -22,14 +20,10 @@ module.exports = function(app) {
                 });
             }
 
-            const audioBuffer = await fetchTTS(text, lang || 'en');
+            const { stream, headers } = await fetchTTS(text, lang || 'en');
 
-            // Send audio file directly
-            res.set({
-                'Content-Type': 'audio/mpeg',
-                'Content-Disposition': 'inline; filename="tts.mp3"'
-            });
-            res.send(audioBuffer);
+            res.setHeader('Content-Type', headers['content-type'] || 'audio/mpeg');
+            stream.pipe(res);
 
         } catch (error) {
             res.status(500).json({
