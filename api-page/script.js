@@ -628,7 +628,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         DOM.modal.queryInputContainer.innerHTML = '';
         DOM.modal.submitBtn.classList.add('d-none');
         DOM.modal.submitBtn.disabled = true;
-        DOM.modal.submitBtn.innerHTML = '<span>Kirim</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>';
+        DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>';
 
         const paramsFromPath = new URLSearchParams(apiData.path.split('?')[1]);
         const paramKeys = Array.from(paramsFromPath.keys());
