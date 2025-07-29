@@ -1,30 +1,31 @@
 const axios = require('axios');
 
 module.exports = function(app) {
-    // TTS handler function
+    // TTS fetcher
     async function fetchTTS(text, lang = 'en') {
         const url = `https://jerrycoder.oggyapi.workers.dev/tts?text=${encodeURIComponent(text)}&lang=${lang}`;
         const { data } = await axios.get(url);
         return data;
     }
 
-    // Route handler
+    // Route: /ai/tts
     app.get('/ai/tts', async (req, res) => {
         try {
             const { text, lang } = req.query;
+
             if (!text) {
                 return res.status(400).json({
                     status: false,
-                    error: 'Query ?text= is required'
+                    error: 'Missing required ?text= parameter'
                 });
             }
 
             const result = await fetchTTS(text, lang || 'en');
 
-            if (result.status !== 'success') {
-                return res.status(500).json({
+            if (!result || result.status !== 'success') {
+                return res.status(502).json({
                     status: false,
-                    error: 'TTS API failed or returned an error'
+                    error: 'TTS API returned an error or failed'
                 });
             }
 
