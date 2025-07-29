@@ -1,22 +1,31 @@
 const axios = require('axios');
-module.exports = function(app) {
-    async function bluearchive() {
+
+module.exports = function (app) {
+    // Fetch waifu image buffer
+    async function fetchWaifuImage() {
         try {
-            const { data } = await axios.get(`https://raw.githubusercontent.com/rynxzyy/blue-archive-r-img/refs/heads/main/links.json`)
-            const response = await axios.get(data[Math.floor(data.length * Math.random())], { responseType: 'arraybuffer' });
-            return Buffer.from(response.data);
+            const { data } = await axios.get('https://jerrycoder.oggyapi.workers.dev/waifuv2?json=true');
+
+            if (!data || !data.url) {
+                throw new Error("Invalid response from waifu API");
+            }
+
+            const imageResponse = await axios.get(data.url, { responseType: 'arraybuffer' });
+            return Buffer.from(imageResponse.data);
         } catch (error) {
             throw error;
         }
     }
+
+    // Route: /random/waifu
     app.get('/random/ba', async (req, res) => {
         try {
-            const pedo = await bluearchive();
+            const imageBuffer = await fetchWaifuImage();
             res.writeHead(200, {
                 'Content-Type': 'image/png',
-                'Content-Length': pedo.length,
+                'Content-Length': imageBuffer.length,
             });
-            res.end(pedo);
+            res.end(imageBuffer);
         } catch (error) {
             res.status(500).send(`Error: ${error.message}`);
         }
