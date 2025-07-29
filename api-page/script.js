@@ -787,22 +787,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             const contentType = response.headers.get('Content-Type');
-            if (contentType && contentType.includes('image/')) {
-                const blob = await response.blob();
-                const imageUrl = URL.createObjectURL(blob);
-                const img = document.createElement('img');
-                img.src = imageUrl;
-                img.alt = apiName;
-                img.className = 'response-image img-fluid rounded shadow-sm fade-in';
-                
-                const downloadBtn = document.createElement('a'); 
-                downloadBtn.href = imageUrl;
-                downloadBtn.download = `${apiName.toLowerCase().replace(/\s+/g, '-')}.${blob.type.split('/')[1] || 'png'}`;
-                downloadBtn.className = 'btn btn-primary mt-3 w-100';
-                downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i> Download Image';
-                
-                DOM.modal.content.appendChild(img);
-                DOM.modal.content.appendChild(downloadBtn);
+if (contentType && contentType.includes('image/')) {
+    const blob = await response.blob();
+    const imageUrl = URL.createObjectURL(blob);
+    
+    // Create and show image
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = apiName;
+    img.className = 'response-image img-fluid rounded shadow-sm fade-in';
+    
+    // Create Download button
+    const downloadBtn = document.createElement('a'); 
+    downloadBtn.href = imageUrl;
+    downloadBtn.download = `${apiName.toLowerCase().replace(/\s+/g, '-')}.${blob.type.split('/')[1] || 'png'}`;
+    downloadBtn.className = 'btn btn-primary mt-3 w-100';
+    downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i> Download Image';
+
+    // Create Retry button
+    const retryBtn = document.createElement('button');
+    retryBtn.className = 'btn btn-secondary mt-2 w-100';
+    retryBtn.innerHTML = '<i class="fas fa-redo-alt me-2"></i> Try Again';
+    retryBtn.onclick = () => {
+        // Optionally clear old content before retrying
+        DOM.modal.content.innerHTML = '<p class="text-muted">Loading new image...</p>';
+        callApiAgain(); // Replace with your function to call the API again
+    };
+
+    // Append to modal
+    DOM.modal.content.appendChild(img);
+    DOM.modal.content.appendChild(downloadBtn);
+    DOM.modal.content.appendChild(retryBtn);
 
             } else if (contentType && contentType.includes('application/json')) {
                 const data = await response.json();
