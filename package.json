@@ -1,6 +1,6 @@
 {
   "name": "rynn-ui",
-  "version": "1.0.0",
+  "version": "3.0.7",
   "description": "A simple and customizable API documentation interface built with Express.js.",
   "main": "index.js",
   "type": "commonjs",
