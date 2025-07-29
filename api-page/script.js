@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         setPageContent(DOM.wm, `© ${currentYear} ${creator}. All rights reserved.`);
         setPageContent(DOM.appName, settings.name, "JerryCoder API");
         setPageContent(DOM.sideNavName, settings.name || "API");
-        setPageContent(DOM.versionBadge, settings.version, "v3.2");
+        setPageContent(DOM.versionBadge, settings.version, "v3.2.0");
         setPageContent(DOM.versionHeaderBadge, settings.header?.status, "Active!");
         setPageContent(DOM.appDescription, settings.description, "Simple and easy to use API documentation.");
 
