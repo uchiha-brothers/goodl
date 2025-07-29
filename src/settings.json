@@ -1,5 +1,5 @@
 {
-  "name": "JerryCoder-API",
+  "name": "Zenzxz Api",
   "version": "v1.0.0",
   "description": "Simple and easy to use API.",
   "bannerImage": "/src/banner.jpg",
@@ -7,7 +7,7 @@
     "status": "Online!"
   },
   "apiSettings": {
-    "creator": "Zenzxz Api",
+    "creator": "JerryCoder",
     "apikey": ["falcon-api"]
   },
   "categories": [
