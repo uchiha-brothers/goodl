@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (DOM.apiLinksContainer) {
             DOM.apiLinksContainer.innerHTML = ''; 
-            const defaultLinks = [{ url: "https://t.me/oggy_workshop", name: "Join Telegram Channel", icon: "fab fa-github" }];
+            const defaultLinks = [{ url: "https://t.me/oggy_workshop", name: "Join Telegram Channel", icon: "fab fa-telegram" }];
             const linksToRender = settings.links?.length ? settings.links : defaultLinks;
 
             linksToRender.forEach(({ url, name, icon }, index) => {
@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- Render Kategori dan Item API ---
     const renderApiCategories = () => {
         if (!DOM.apiContent || !settings.categories || !settings.categories.length) {
-            displayErrorState("Tidak ada kategori API yang ditemukan.");
+            displayErrorState("No API categories found.");
             return;
         }
         DOM.apiContent.innerHTML = ''; 
@@ -479,7 +479,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 getBtn.dataset.apiDesc = item.desc;
                 if (item.params) getBtn.dataset.apiParams = JSON.stringify(item.params);
                 if (item.innerDesc) getBtn.dataset.apiInnerDesc = item.innerDesc;
-                getBtn.setAttribute('aria-label', `Dapatkan detail untuk ${item.name}`);
+                getBtn.setAttribute('aria-label', `Get details for ${item.name}`);
                 
                 const status = item.status || "ready";
                 const statusConfig = {
@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (status === 'error' || status === 'update') {
                     getBtn.disabled = true;
                     apiCard.classList.add('api-card-unavailable');
-                    getBtn.title = `API ini sedang dalam status '${status}', sementara tidak dapat digunakan.`;
+                    getBtn.title = `This API is currently in status '${status}', temporarily unavailable.`;
                 }
 
                 const statusIndicator = document.createElement('div');
@@ -518,14 +518,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const displayErrorState = (message) => {
         if (!DOM.apiContent) return;
         DOM.apiContent.innerHTML = `
-            <div class="no-results-message text-center p-5">
-                <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
-                <p class="h5">${message}</p>
-                <p class="text-muted">Silakan coba muat ulang halaman atau hubungi administrator.</p>
-                <button class="btn btn-primary mt-3" onclick="location.reload()">
-                    <i class="fas fa-sync-alt me-2"></i> Muat Ulang
-                </button>
-            </div>
+            <div class="no-results-message text-center p-5"> 
+<i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i> 
+<p class="h5">${message}</p> 
+<p class="text-muted">Please try reloading the page or contact the administrator.</p> 
+<button class="btn btn-primary mt-3" onclick="location.reload()"> 
+<i class="fas fa-sync-alt me-2"></i> Reload 
+</button> 
+</div>
         `;
     };
     
@@ -583,10 +583,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             noResultsMsg.style.display = 'none'; 
             noResultsMsg.innerHTML = `
                 <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                <p class="h5">Tidak ada hasil untuk <span></span></p>
-                <button id="clearSearchFromMsg" class="btn btn-primary mt-3">
-                    <i class="fas fa-times me-2"></i> Hapus Pencarian
-                </button>
+<p class="h5">No results for <span></span></p>
+<button id="clearSearchFromMsg" class="btn btn-primary mt-3">
+<i class="fas fa-times me-2"></i> Clear Search
+</button>
             `;
             DOM.apiContent.appendChild(noResultsMsg);
             document.getElementById('clearSearchFromMsg').addEventListener('click', clearSearch);
@@ -744,7 +744,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 errorMsg.setAttribute('role', 'alert');
                 DOM.modal.queryInputContainer.appendChild(errorMsg);
             }
-            errorMsg.innerHTML = '<i class="fas fa-exclamation-circle me-2"></i> Harap isi semua kolom yang wajib diisi.';
+            errorMsg.innerHTML = '<i class="fas fa-exclamation-circle me-2"></i> Please fill in all required fields.';
             errorMsg.classList.remove('fade-out');
             errorMsg.classList.add('fade-in');
 
@@ -754,7 +754,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         
         DOM.modal.submitBtn.disabled = true;
-        DOM.modal.submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Memproses...';
+        DOM.modal.submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Processing...';
 
         const apiUrlWithParams = `${window.location.origin}${currentApiData.path.split('?')[0]}?${newParams.toString()}`;
         DOM.modal.endpoint.textContent = apiUrlWithParams; 
@@ -799,7 +799,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 downloadBtn.href = imageUrl;
                 downloadBtn.download = `${apiName.toLowerCase().replace(/\s+/g, '-')}.${blob.type.split('/')[1] || 'png'}`;
                 downloadBtn.className = 'btn btn-primary mt-3 w-100';
-                downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i> Unduh Gambar';
+                downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i> Download Image';
                 
                 DOM.modal.content.appendChild(img);
                 DOM.modal.content.appendChild(downloadBtn);
@@ -813,30 +813,30 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             } else {
                 const textData = await response.text();
-                DOM.modal.content.textContent = textData || "Respons tidak memiliki konten atau format tidak dikenal.";
+                DOM.modal.content.textContent = textData || "Response has no content or unknown format.";
             }
 
             DOM.modal.container.classList.remove('d-none');
             DOM.modal.content.classList.remove('d-none');
             DOM.modal.container.classList.add('slide-in-bottom');
-            showToast(`Berhasil mengambil data untuk ${apiName}`, 'success');
+            showToast(`Successfully retrieved data for ${apiName}`, 'success');
 
         } catch (error) {
             console.error("API Request Error:", error);
             const errorHtml = `
                 <div class="error-container text-center p-3">
                     <i class="fas fa-exclamation-triangle fa-2x text-danger mb-2"></i>
-                    <h6 class="text-danger">Terjadi Kesalahan</h6>
-                    <p class="text-muted small">${error.message || 'Tidak dapat mengambil data dari server.'}</p>
+                    <h6 class="text-danger">There is an error</h6>
+                    <p class="text-muted small">${error.message || 'Unable to retrieve data from server.'}</p>
                     ${currentApiData && currentApiData.path.split('?')[1] ? 
                     `<button class="btn btn-sm btn-outline-primary mt-2 retry-query-btn">
-                        <i class="fas fa-sync-alt me-1"></i> Coba Lagi
+                        <i class="fas fa-sync-alt me-1"></i> Try again
                     </button>` : ''}
                 </div>`;
             DOM.modal.content.innerHTML = errorHtml;
             DOM.modal.container.classList.remove('d-none');
             DOM.modal.content.classList.remove('d-none');
-            showToast('Gagal mengambil data. Periksa detail di modal.', 'error');
+            showToast('Failed to retrieve data. Check details in modal.', 'error');
 
             const retryBtn = DOM.modal.content.querySelector('.retry-query-btn');
             if (retryBtn) {
@@ -846,7 +846,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                          DOM.modal.queryInputContainer.firstChild.classList.remove('fade-out');
                     }
                     DOM.modal.submitBtn.disabled = false; 
-                    DOM.modal.submitBtn.innerHTML = '<span>Kirim</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>';
+                    DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>';
                     DOM.modal.container.classList.add('d-none'); 
                 };
             }
@@ -860,7 +860,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (!hasParams || (hasError && !hasRetryButton)) {
                     DOM.modal.submitBtn.disabled = !hasParams; 
-                    DOM.modal.submitBtn.innerHTML = '<span>Kirim</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>';
+                    DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>';
                 }
              }
         }
@@ -931,12 +931,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             content.style.maxHeight = content.scrollHeight + "px";
             trigger.dataset.folded = "false";
             trigger.setAttribute('aria-expanded', 'true');
-            indicator.innerHTML = '(<i class="fas fa-chevron-up"></i> Tutup)';
+            indicator.innerHTML = '(<i class="fas fa-chevron-up"></i> Close)';
         } else { 
             content.style.maxHeight = "0px";
             trigger.dataset.folded = "true";
             trigger.setAttribute('aria-expanded', 'false');
-            indicator.innerHTML = '(<i class="fas fa-chevron-down"></i> Buka)';
+            indicator.innerHTML = '(<i class="fas fa-chevron-down"></i> Open)';
         }
     };
     
