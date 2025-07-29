@@ -2,7 +2,7 @@
 
 A modern, clean, and user-friendly interface for browsing and testing Falcon API endpoints.
 
-![JerryCoder API UI Screenshot](http://jerrycoder.oggyapi.workers.dev/ss?url=https://jerrycoder.vercel.app)
+![JerryCoder API UI Screenshot](https://api.pikwy.com/web/6888f8319312d66ebf7daca6.jpg)
 
 ## Features
 
