@@ -676,9 +676,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 inputField.type = 'text';
                 inputField.className = 'form-control custom-input';
                 inputField.id = `param-${paramKey}`;
-                inputField.placeholder = `Masukkan ${paramKey}...`;
+                inputField.placeholder = `Enter ${paramKey}...`;
                 inputField.dataset.param = paramKey;
-                inputField.required = true;
+                inputField.required = false;
                 inputField.autocomplete = "off";
                 inputField.addEventListener('input', validateModalInputs);
                 inputContainer.appendChild(inputField);
