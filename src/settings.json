@@ -2,7 +2,7 @@
   "name": "JerryCoder",
   "version": "v3.2.0",
   "description": "Simple and easy to use API.",
-  "bannerImage": "/src/banner.jpg",
+  "bannerImage": "https://jerrycoder.oggyapi.workers.dev/waifu",
   "header": {
     "status": "Online!"
   },
