@@ -84,9 +84,9 @@
       "status": "ready"
     },
     {
-      "name": "Anal",
-      "desc": "Get random anal image from waifuim",
-      "path": "/waifuim/anal",
+      "name": "Ecchi",
+      "desc": "Get random ecchi image from waifuim",
+      "path": "/waifuim/ecchi",
       "status": "ready"
     },
     {
@@ -99,6 +99,12 @@
       "name": "Maid",
       "desc": "Get random maid image from waifuim",
       "path": "/waifuim/maid",
+      "status": "ready"
+    },
+    {
+      "name": "Ero",
+      "desc": "Get random ero image from waifuim",
+      "path": "/waifuim/ero",
       "status": "ready"
     }
   ]
