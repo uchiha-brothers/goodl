@@ -1,7 +1,7 @@
 /**
  * WaifuIm NSFW API - Waifuim Image Fetcher
  * • Creator: JerryCoder
- * • Telegram: https://t.me/oggy_workshp
+ * • Telegram: https://t.me/oggy_workshop
  * • Copyright © 2025 by JerryCoder. All rights reserved.
  */
 
