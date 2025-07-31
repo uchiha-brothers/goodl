@@ -5,7 +5,6 @@
  * • Copyright © 2025 by JerryCoder. All rights reserved.
  */
 
-
 const axios = require('axios');
 
 module.exports = function (app) {
