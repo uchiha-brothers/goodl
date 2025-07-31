@@ -12,7 +12,7 @@ module.exports = function (app) {
     async function fetchHentaiImage() {
         try {
             const response = await axios.get(
-                'https://jerryproxy.vercel.app/api/proxy?url=https://jerrycoder.oggyapi.workers.dev/waifu',
+                'https://jerryproxy.vercel.app/api/proxy?url=https://jerrycoder.oggyapi.workers.dev/waifuv2',
                 { responseType: 'arraybuffer' }
             );
 
