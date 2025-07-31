@@ -129,7 +129,7 @@
       "name": "Oral",
       "desc": "Get random oral image from waifuim",
       "path": "/waifuim/oral",
-      "status": "ready"
+      "status": "update"
     },
     {
       "name": "Paizuri",
@@ -141,7 +141,7 @@
       "name": "Selfies",
       "desc": "Get random selfies image from waifuim",
       "path": "/waifuim/selfies",
-      "status": "ready"
+      "status": "error"
     },
     {
       "name": "Uniform",
