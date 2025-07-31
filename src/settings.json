@@ -46,6 +46,17 @@
       ]
     },
     {
+      "name": "NSFWHub",
+      "items": [
+        {
+          "name": "Hentai",
+          "desc": "Get random hentai image (18+ only)",
+          "path": "/nsfw/hentai",
+          "status": "ready"
+        }
+      ]
+    },
+    {
       "name": "Random",
       "items": [
         {
