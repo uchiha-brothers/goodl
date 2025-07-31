@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         searchInput: document.getElementById('searchInput'),
         clearSearchBtn: document.getElementById('clearSearch'),
         apiContent: document.getElementById('apiContent'),
-        notificationToast: document.getElementById('notificationToast'), // Toast untuk notifikasi umum
-        notificationBell: document.getElementById('notificationBell'), // Tombol lonceng
-        notificationBadge: document.getElementById('notificationBadge'), // Badge merah
+        notificationToast: document.getElementById('notificationToast'),
+        notificationBell: document.getElementById('notificationBell'),
+        notificationBadge: document.getElementById('notificationBadge'),
         modal: {
             instance: null, // Akan diinisialisasi nanti
             element: document.getElementById('apiResponseModal'),
