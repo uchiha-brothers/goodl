@@ -18,7 +18,7 @@
           "name": "LuminAI",
           "desc": "Talk with luminai",
           "path": "/ai/luminai?text=",
-          "status": "error",
+          "status": "ready",
           "params": {
             "text": "Text for luminai to respond to"
           }
@@ -27,7 +27,7 @@
           "name": "HydroMind",
           "desc": "See the list of supported AI models here: https://mind.hydrooo.web.id",
           "path": "/ai/hydromind?text=&model=",
-          "status": "ready",
+          "status": "error",
           "params": {
             "text": "Teks atau perintah untuk chat AI",
             "model": "See the list of supported AI models here: https://mind.hydrooo.web.id"
