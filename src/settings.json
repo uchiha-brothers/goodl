@@ -46,32 +46,42 @@
       ]
     },
     {
-  "name": "NSFWHub",
+  "name": "NSFWHub   [34]",
   "items": [
-    {
-      "name": "Hentai",
-      "desc": "Get random nsfw image hentai",
-      "path": "/nsfw/hentai",
-      "status": "ready"
-    },
-    {
-      "name": "Ass",
-      "desc": "Get random nsfw image ass",
-      "path": "/nsfw/ass",
-      "status": "ready"
-    },
-    {
-      "name": "Anal",
-      "desc": "Get random nsfw image anal",
-      "path": "/nsfw/anal",
-      "status": "ready"
-    },
-    {
-      "name": "Finger",
-      "desc": "Get random nsfw image finger",
-      "path": "/nsfw/finger",
-      "status": "ready"
-    }
+    { "name": "Anal", "desc": "Get random nsfw image anal", "path": "/nsfw/anal", "status": "ready" },
+    { "name": "Ass", "desc": "Get random nsfw image ass", "path": "/nsfw/ass", "status": "ready" },
+    { "name": "Bdsm", "desc": "Get random nsfw image bdsm", "path": "/nsfw/bdsm", "status": "ready" },
+    { "name": "Black", "desc": "Get random nsfw image black", "path": "/nsfw/black", "status": "ready" },
+    { "name": "Blowjub", "desc": "Get random nsfw image blowjub", "path": "/nsfw/blowjub", "status": "ready" },
+    { "name": "Boobs", "desc": "Get random nsfw image boobs", "path": "/nsfw/boobs", "status": "ready" },
+    { "name": "Bottomless", "desc": "Get random nsfw image bottomless", "path": "/nsfw/bottomless", "status": "ready" },
+    { "name": "Collared", "desc": "Get random nsfw image collared", "path": "/nsfw/collared", "status": "ready" },
+    { "name": "Cum", "desc": "Get random nsfw image cum", "path": "/nsfw/cum", "status": "ready" },
+    { "name": "Cumsluts", "desc": "Get random nsfw image cumsluts", "path": "/nsfw/cumsluts", "status": "ready" },
+    { "name": "Dick", "desc": "Get random nsfw image dick", "path": "/nsfw/dick", "status": "ready" },
+    { "name": "Dom", "desc": "Get random nsfw image dom", "path": "/nsfw/dom", "status": "ready" },
+    { "name": "Dp", "desc": "Get random nsfw image dp", "path": "/nsfw/dp", "status": "ready" },
+    { "name": "Easter", "desc": "Get random nsfw image easter", "path": "/nsfw/easter", "status": "ready" },
+    { "name": "Extreme", "desc": "Get random nsfw image extreme", "path": "/nsfw/extreme", "status": "ready" },
+    { "name": "Feet", "desc": "Get random nsfw image feet", "path": "/nsfw/feet", "status": "ready" },
+    { "name": "Finger", "desc": "Get random nsfw image finger", "path": "/nsfw/finger", "status": "ready" },
+    { "name": "Fuck", "desc": "Get random nsfw image fuck", "path": "/nsfw/fuck", "status": "ready" },
+    { "name": "Futa", "desc": "Get random nsfw image futa", "path": "/nsfw/futa", "status": "ready" },
+    { "name": "Gay", "desc": "Get random nsfw image gay", "path": "/nsfw/gay", "status": "ready" },
+    { "name": "Group", "desc": "Get random nsfw image group", "path": "/nsfw/group", "status": "ready" },
+    { "name": "Hentai", "desc": "Get random nsfw hentai image", "path": "/nsfw/hentai", "status": "ready" },
+    { "name": "Kiss", "desc": "Get random nsfw image kiss", "path": "/nsfw/kiss", "status": "ready" },
+    { "name": "Lesbian", "desc": "Get random nsfw image lesbian", "path": "/nsfw/lesbian", "status": "ready" },
+    { "name": "Lick", "desc": "Get random nsfw image lick", "path": "/nsfw/lick", "status": "ready" },
+    { "name": "Pegged", "desc": "Get random nsfw image pegged", "path": "/nsfw/pegged", "status": "ready" },
+    { "name": "Puffies", "desc": "Get random nsfw image puffies", "path": "/nsfw/puffies", "status": "ready" },
+    { "name": "Pussy", "desc": "Get random nsfw image pussy", "path": "/nsfw/pussy", "status": "ready" },
+    { "name": "Real", "desc": "Get random nsfw image real", "path": "/nsfw/real", "status": "ready" },
+    { "name": "Sixtynine", "desc": "Get random nsfw image sixtynine", "path": "/nsfw/sixtynine", "status": "ready" },
+    { "name": "Suck", "desc": "Get random nsfw image suck", "path": "/nsfw/suck", "status": "ready" },
+    { "name": "Tattoo", "desc": "Get random nsfw image tattoo", "path": "/nsfw/tattoo", "status": "ready" },
+    { "name": "Tiny", "desc": "Get random nsfw image tiny", "path": "/nsfw/tiny", "status": "ready" },
+    { "name": "Xmas", "desc": "Get random nsfw image xmas", "path": "/nsfw/xmas", "status": "ready" }
   ]
  },
     {
