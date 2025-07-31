@@ -1,6 +1,6 @@
 # JerryCoder API UI
 
-A modern, clean, and user-friendly interface for browsing and testing Falcon API endpoints.
+A modern, clean, and user-friendly interface for browsing and testing JerryCoder API endpoints.
 
 ![JerryCoder API UI Screenshot](https://api.pikwy.com/web/6888f8319312d66ebf7daca6.jpg)
 
@@ -25,12 +25,12 @@ A modern, clean, and user-friendly interface for browsing and testing Falcon API
 
 1. Clone this repository to your web server:
    ```bash
-   git clone https://github.com/FlowFalcon/falcon-api-ui.git
+   git clone https://github.com/mksir12/falcon-api-ui.git
    ```
 
 2. Configure your API endpoints in `settings.json` (see Configuration section below)
 
-3. Access the UI through your web server (e.g., `https://your-domain.com/falcon-api-ui/`)
+3. Access the UI through your web server (e.g., `https://your.domain.com/falcon-api-ui/`)
 
 ## Configuration
 
@@ -38,16 +38,16 @@ All API endpoints and categories are configured in the `settings.json` file. The
 
 ```json
 {
-  "name": "Falcon-Api",
-  "version": "v1.2",
+  "name": "JerryCoder-Api",
+  "version": "v3.2.0",
   "description": "Simple and easy to use API.",
   "bannerImage": "/src/banner.jpg",
   "header": {
     "status": "Online!"
   },
   "apiSettings": {
-    "creator": "FlowFalcon", 
-    "apikey": ["falcon-api"]
+    "creator": "JerryCoder", 
+    "apikey": ["jerry-api"]
   },
   "categories": [
     {
@@ -143,4 +143,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-Created with ❤️ by [FlowFalcon](https://github.com/FlowFalcon)
+## Special Thanks❤️
+• [FlowFalcon](https://github.com/FlowFalcon)
+• [Rynn-k](https://github.com/rynn-k)
+
+Created by [JerryCoder](https://t.me/oggy_workshop)
