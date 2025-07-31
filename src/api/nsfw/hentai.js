@@ -5,7 +5,7 @@ module.exports = function (app) {
     async function fetchHentaiImage() {
         try {
             const { data } = await axios.get(
-                'https://jerryproxy.vercel.app/api/proxy?url=https%3A%2F%2Fapi.nekorinn.my.id/nsfwhub/hentai',
+                'https://jerryproxy.vercel.app/api/proxy?url=https://api.nekorinn.my.id/nsfwhub/hentai',
                 { responseType: 'arraybuffer' }
             );
             return Buffer.from(data);
