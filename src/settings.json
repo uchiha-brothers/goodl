@@ -75,7 +75,7 @@
   ]
  },
     {
-  "name": "WaifuIm",
+  "name": "WaifuIm  [ 12 ]",
   "items": [
     {
       "name": "Ass",
@@ -90,9 +90,15 @@
       "status": "ready"
     },
     {
-      "name": "Milf",
-      "desc": "Get random milf image from waifuim",
-      "path": "/waifuim/milf",
+      "name": "Ero",
+      "desc": "Get random ero image from waifuim",
+      "path": "/waifuim/ero",
+      "status": "ready"
+    },
+    {
+      "name": "Hentai",
+      "desc": "Get random hentai image from waifuim",
+      "path": "/waifuim/hentai",
       "status": "ready"
     },
     {
@@ -102,9 +108,45 @@
       "status": "ready"
     },
     {
-      "name": "Ero",
-      "desc": "Get random ero image from waifuim",
-      "path": "/waifuim/ero",
+      "name": "Milf",
+      "desc": "Get random milf image from waifuim",
+      "path": "/waifuim/milf",
+      "status": "ready"
+    },
+    {
+      "name": "Oppai",
+      "desc": "Get random oppai image from waifuim",
+      "path": "/waifuim/oppai",
+      "status": "ready"
+    },
+    {
+      "name": "Oral",
+      "desc": "Get random oral image from waifuim",
+      "path": "/waifuim/oral",
+      "status": "ready"
+    },
+    {
+      "name": "Paizuri",
+      "desc": "Get random paizuri image from waifuim",
+      "path": "/waifuim/paizuri",
+      "status": "ready"
+    },
+    {
+      "name": "Selfies",
+      "desc": "Get random selfies image from waifuim",
+      "path": "/waifuim/selfies",
+      "status": "ready"
+    },
+    {
+      "name": "Uniform",
+      "desc": "Get random uniform image from waifuim",
+      "path": "/waifuim/uniform",
+      "status": "ready"
+    },
+    {
+      "name": "Waifu",
+      "desc": "Get random waifu image from waifuim",
+      "path": "/waifuim/waifu",
       "status": "ready"
     }
   ]
