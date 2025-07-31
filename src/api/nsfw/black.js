@@ -8,7 +8,7 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-    // 🧠 JerryCoder Copyright: Fetch nsfwhub image from Nsfwhub via JerryProxy
+    // 🧠 JerryCoder Copyright: Fetch nsfwhub image from Nsfwhub via JerryProx
     async function fetchHentaiImage() {
         try {
             const response = await axios.get(
