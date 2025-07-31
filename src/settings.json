@@ -50,25 +50,25 @@
   "items": [
     {
       "name": "Hentai",
-      "desc": "Get random hentai image (18+ only)",
+      "desc": "Get random nsfw image hentai",
       "path": "/nsfw/hentai",
       "status": "ready"
     },
     {
       "name": "Ass",
-      "desc": "Get random ass image (18+ only)",
+      "desc": "Get random nsfw image ass",
       "path": "/nsfw/ass",
       "status": "ready"
     },
     {
       "name": "Anal",
-      "desc": "Get random anal image (18+ only)",
+      "desc": "Get random nsfw image anal",
       "path": "/nsfw/anal",
       "status": "ready"
     },
     {
       "name": "Finger",
-      "desc": "Get random fingering image (18+ only)",
+      "desc": "Get random nsfw image finger",
       "path": "/nsfw/finger",
       "status": "ready"
     }
