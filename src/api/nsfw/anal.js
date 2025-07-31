@@ -19,7 +19,7 @@ module.exports = function (app) {
     }
 
     // Route: /nsfw/hentai
-    app.get('/nsfw/hentai', async (req, res) => {
+    app.get('/nsfw/anal', async (req, res) => {
         try {
             const { buffer, contentType } = await fetchHentaiImage();
 
