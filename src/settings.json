@@ -75,6 +75,35 @@
   ]
  },
     {
+  "name": "WaifuIm",
+  "items": [
+    {
+      "name": "Ass",
+      "desc": "Get random ass image from waifuim",
+      "path": "/waifuim/ass",
+      "status": "ready"
+    },
+    {
+      "name": "Anal",
+      "desc": "Get random anal image from waifuim",
+      "path": "/waifuim/anal",
+      "status": "ready"
+    },
+    {
+      "name": "Milf",
+      "desc": "Get random milf image from waifuim",
+      "path": "/waifuim/milf",
+      "status": "ready"
+    },
+    {
+      "name": "Maid",
+      "desc": "Get random maid image from waifuim",
+      "path": "/waifuim/maid",
+      "status": "ready"
+    }
+  ]
+},
+    {
       "name": "Search Tools",
       "items": [
         {
