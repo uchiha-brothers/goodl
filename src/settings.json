@@ -114,6 +114,12 @@
       "status": "ready"
     },
     {
+      "name": "Neko",
+      "desc": "Get random neko image from waifuim",
+      "path": "/waifuim/neko",
+      "status": "down"
+    },
+    {
       "name": "Oppai",
       "desc": "Get random oppai image from waifuim",
       "path": "/waifuim/oppai",
