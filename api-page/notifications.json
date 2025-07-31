@@ -1,5 +1,5 @@
-/**
- * notifications.json
+/
+  notifications.json
  * 
  * Handles fetching and displaying API update notifications.
  * 
@@ -19,6 +19,8 @@
     "message": "Now there is a new update from JerryCoder API, please check the information on our Telegram channel"
   }
 ]
+
+// hyy
 
 /**
  * ──────────────────────────────────────────────────────────────
