@@ -1,8 +1,29 @@
+/**
+ * notifications.json
+ * 
+ * Handles fetching and displaying API update notifications.
+ * 
+ * • Creator: JerryCoder
+ * • Telegram: https://t.me/oggy_workshop
+ * • Copyright © 2025 by JerryCoder. All rights reserved.
+ * 
+ * This script is protected by international copyright laws.
+ * Redistribution, modification, or use without permission is prohibited.
+ */
+
 [
   {
     "id": "#01",
     "date": "2025-06-015",
     "title": "Update Display API!", 
-    "message": "Now there is a new update from UI API, please check the information on our WhatsApp channel"
+    "message": "Now there is a new update from JerryCoder API, please check the information on our Telegram channel"
   }
 ]
+
+/**
+ * ──────────────────────────────────────────────────────────────
+ * Copyright © 2025 JerryCoder • All Rights Reserved
+ * Telegram: https://t.me/oggy_workshop
+ * Any use without explicit credit to JerryCoder is prohibited.
+ * ──────────────────────────────────────────────────────────────
+ */
