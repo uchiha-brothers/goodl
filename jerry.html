@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Audio Recorder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .waveform {
+            position: relative;
+            height: 80px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .waveform-inner {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        .waveform-bar {
+            width: 3px;
+            background-color: #fff;
+            margin: 0 1px;
+            border-radius: 1px;
+            height: 5%;
+            transition: height 0.1s ease;
+        }
+        
+        .recording-pulse {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #ef4444;
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+            
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+        
+        .btn {
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .effect-btn {
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .effect-btn.active {
+            border-color: #4f46e5;
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+        
+        .effect-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-8 w-full max-w-md shadow-xl border border-white border-opacity-20">
+        <h1 class="text-white text-2xl font-bold mb-6 text-center">Voice Recorder</h1>
+        
+        <div class="waveform mb-6">
+            <div class="waveform-inner" id="waveform"></div>
+        </div>
+        
+        <div class="flex items-center justify-between mb-8">
+            <div class="text-white flex items-center">
+                <span id="recording-indicator" class="hidden">
+                    <span class="recording-pulse"></span>Recording
+                </span>
+                <span id="timer" class="font-mono text-xl">00:00</span>
+            </div>
+            
+            <div class="flex space-x-3">
+                <button id="recordButton" class="btn bg-red-500 hover:bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                </button>
+                
+                <button id="stopButton" class="btn bg-gray-700 hover:bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
+                    </svg>
+                </button>
+                
+                <button id="playButton" class="btn bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </button>
+            </div>
+            
+            <button id="downloadButton" class="btn bg-green-500 hover:bg-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+            </button>
+        </div>
+        
+        <div id="effects-container" class="hidden">
+            <h2 class="text-white text-lg font-medium mb-3">Voice Effects</h2>
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <button class="effect-btn text-white py-2 px-4 rounded-lg bg-white bg-opacity-5" data-effect="normal">
+                    Normal
+                </button>
+                <button class="effect-btn text-white py-2 px-4 rounded-lg bg-white bg-opacity-5" data-effect="robot">
+                    Robot
+                </button>
+                <button class="effect-btn text-white py-2 px-4 rounded-lg bg-white bg-opacity-5" data-effect="alien">
+                    Alien
+                </button>
+                <button class="effect-btn text-white py-2 px-4 rounded-lg bg-white bg-opacity-5" data-effect="chipmunk">
+                    Chipmunk
+                </button>
+            </div>
+        </div>
+        
+        <div id="status-message" class="text-center text-white text-sm opacity-80 mt-4"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const recordButton = document.getElementById('recordButton');
+            const stopButton = document.getElementById('stopButton');
+            const playButton = document.getElementById('playButton');
+            const downloadButton = document.getElementById('downloadButton');
+            const timerDisplay = document.getElementById('timer');
+            const recordingIndicator = document.getElementById('recording-indicator');
+            const waveformContainer = document.getElementById('waveform');
+            const effectsContainer = document.getElementById('effects-container');
+            const effectButtons = document.querySelectorAll('.effect-btn');
+            const statusMessage = document.getElementById('status-message');
+            
+            // Audio context and variables
+            let audioContext;
+            let mediaRecorder;
+            let audioChunks = [];
+            let audioBlob;
+            let audioUrl;
+            let audio;
+            let analyser;
+            let source;
+            let timerInterval;
+            let seconds = 0;
+            let minutes = 0;
+            let currentEffect = 'normal';
+            let isRecording = false;
+            
+            // Create waveform bars
+            for (let i = 0; i < 50; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'waveform-bar';
+                waveformContainer.appendChild(bar);
+            }
+            const waveformBars = document.querySelectorAll('.waveform-bar');
+            
+            // Initialize audio context
+            function initAudioContext() {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+            }
+            
+            // Update timer display
+            function updateTimer() {
+                seconds++;
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+                
+                const formattedMinutes = String(minutes).padStart(2, '0');
+                const formattedSeconds = String(seconds).padStart(2, '0');
+                timerDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
+            }
+            
+            // Reset timer
+            function resetTimer() {
+                clearInterval(timerInterval);
+                seconds = 0;
+                minutes = 0;
+                timerDisplay.textContent = '00:00';
+            }
+            
+            // Update waveform visualization
+            function updateWaveform() {
+                if (!analyser) return;
+                
+                const bufferLength = analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+                analyser.getByteFrequencyData(dataArray);
+                
+                const step = Math.floor(bufferLength / waveformBars.length);
+                
+                for (let i = 0; i < waveformBars.length; i++) {
+                    const value = dataArray[i * step];
+                    const height = Math.max(5, value / 255 * 100);
+                    waveformBars[i].style.height = `${height}%`;
+                }
+                
+                if (isRecording || (audio && !audio.paused)) {
+                    requestAnimationFrame(updateWaveform);
+                } else {
+                    waveformBars.forEach(bar => {
+                        bar.style.height = '5%';
+                    });
+                }
+            }
+            
+            // Start recording
+            function startRecording() {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    statusMessage.textContent = 'Audio recording is not supported in this browser.';
+                    return;
+                }
+                
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(stream => {
+                        initAudioContext();
+                        
+                        isRecording = true;
+                        audioChunks = [];
+                        
+                        // Connect stream to analyser for visualization
+                        source = audioContext.createMediaStreamSource(stream);
+                        source.connect(analyser);
+                        
+                        // Create media recorder
+                        mediaRecorder = new MediaRecorder(stream);
+                        
+                        mediaRecorder.ondataavailable = (event) => {
+                            audioChunks.push(event.data);
+                        };
+                        
+                        mediaRecorder.onstop = () => {
+                            audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                            audioUrl = URL.createObjectURL(audioBlob);
+                            
+                            audio = new Audio(audioUrl);
+                            
+                            playButton.classList.remove('hidden');
+                            downloadButton.classList.remove('hidden');
+                            effectsContainer.classList.remove('hidden');
+                            
+                            // Set the first effect button (Normal) as active
+                            effectButtons[0].classList.add('active');
+                        };
+                        
+                        // Start recording
+                        mediaRecorder.start();
+                        
+                        // Update UI
+                        recordButton.classList.add('hidden');
+                        stopButton.classList.remove('hidden');
+                        recordingIndicator.classList.remove('hidden');
+                        
+                        // Start timer
+                        resetTimer();
+                        timerInterval = setInterval(updateTimer, 1000);
+                        
+                        // Start waveform visualization
+                        updateWaveform();
+                        
+                        statusMessage.textContent = '';
+                    })
+                    .catch(error => {
+                        console.error('Error accessing microphone:', error);
+                        statusMessage.textContent = 'Error accessing microphone. Please ensure you have granted permission.';
+                    });
+            }
+            
+            // Stop recording
+            function stopRecording() {
+                if (mediaRecorder && isRecording) {
+                    isRecording = false;
+                    mediaRecorder.stop();
+                    clearInterval(timerInterval);
+                    
+                    // Update UI
+                    stopButton.classList.add('hidden');
+                    recordButton.classList.remove('hidden');
+                    recordingIndicator.classList.add('hidden');
+                    
+                    // Stop all tracks in the stream
+                    mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                }
+            }
+            
+            // Play recorded audio with effect
+            function playAudio() {
+                if (!audio) return;
+                
+                // Reset audio
+                audio.pause();
+                audio.currentTime = 0;
+                
+                // Apply selected effect
+                applyEffect(currentEffect).then(() => {
+                    audio.play();
+                    updateWaveform();
+                });
+            }
+            
+            // Apply voice effect
+            async function applyEffect(effect) {
+                if (!audioBlob || !audioContext) return;
+                
+                // Create a new audio context if needed
+                if (!audioContext || audioContext.state === 'closed') {
+                    initAudioContext();
+                }
+                
+                // Resume audio context if suspended
+                if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+                
+                // Convert blob to array buffer
+                const arrayBuffer = await audioBlob.arrayBuffer();
+                const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                
+                // Create a new audio buffer for the processed audio
+                const processedBuffer = audioContext.createBuffer(
+                    audioBuffer.numberOfChannels,
+                    audioBuffer.length,
+                    audioBuffer.sampleRate
+                );
+                
+                // Process each channel
+                for (let channel = 0; channel < audioBuffer.numberOfChannels; channel++) {
+                    const inputData = audioBuffer.getChannelData(channel);
+                    const outputData = processedBuffer.getChannelData(channel);
+                    
+                    // Apply effect
+                    switch (effect) {
+                        case 'robot':
+                            // Robot effect - modulation with square wave
+                            const robotFreq = 30;
+                            for (let i = 0; i < inputData.length; i++) {
+                                const modulator = ((Math.floor(i / (audioBuffer.sampleRate / robotFreq)) % 2) * 2 - 1);
+                                outputData[i] = inputData[i] * modulator;
+                            }
+                            break;
+                            
+                        case 'alien':
+                            // Alien effect - frequency shifting and reverb
+                            for (let i = 0; i < inputData.length; i++) {
+                                const echo = i > 5000 ? inputData[i - 5000] * 0.5 : 0;
+                                outputData[i] = inputData[i] * Math.sin(i * 0.0001) + echo;
+                            }
+                            break;
+                            
+                        case 'chipmunk':
+                            // Chipmunk effect - simple pitch shift by skipping samples
+                            const skipFactor = 2;
+                            for (let i = 0; i < inputData.length; i++) {
+                                outputData[i] = inputData[Math.floor(i * skipFactor) % inputData.length];
+                            }
+                            break;
+                            
+                        default:
+                            // Normal - no effect
+                            for (let i = 0; i < inputData.length; i++) {
+                                outputData[i] = inputData[i];
+                            }
+                    }
+                }
+                
+                // Create a new blob from the processed buffer
+                const offlineContext = new OfflineAudioContext(
+                    processedBuffer.numberOfChannels,
+                    processedBuffer.length,
+                    processedBuffer.sampleRate
+                );
+                
+                const bufferSource = offlineContext.createBufferSource();
+                bufferSource.buffer = processedBuffer;
+                bufferSource.connect(offlineContext.destination);
+                bufferSource.start();
+                
+                const renderedBuffer = await offlineContext.startRendering();
+                
+                // Convert the rendered buffer to a WAV file
+                const wavBlob = audioBufferToWav(renderedBuffer);
+                
+                // Update audio element with the processed audio
+                const newAudioUrl = URL.createObjectURL(wavBlob);
+                
+                // Revoke the old URL to prevent memory leaks
+                if (audioUrl) {
+                    URL.revokeObjectURL(audioUrl);
+                }
+                
+                audioUrl = newAudioUrl;
+                audio = new Audio(audioUrl);
+                
+                // Connect audio element to analyser for visualization
+                audio.addEventListener('play', () => {
+                    const audioSource = audioContext.createMediaElementSource(audio);
+                    audioSource.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                }, { once: true });
+            }
+            
+            // Convert AudioBuffer to WAV Blob
+            function audioBufferToWav(buffer) {
+                const numOfChannels = buffer.numberOfChannels;
+                const length = buffer.length * numOfChannels * 2;
+                const sampleRate = buffer.sampleRate;
+                const wavDataView = new DataView(new ArrayBuffer(44 + length));
+                
+                // RIFF identifier
+                writeString(wavDataView, 0, 'RIFF');
+                // File length
+                wavDataView.setUint32(4, 36 + length, true);
+                // RIFF type
+                writeString(wavDataView, 8, 'WAVE');
+                // Format chunk identifier
+                writeString(wavDataView, 12, 'fmt ');
+                // Format chunk length
+                wavDataView.setUint32(16, 16, true);
+                // Sample format (raw)
+                wavDataView.setUint16(20, 1, true);
+                // Channel count
+                wavDataView.setUint16(22, numOfChannels, true);
+                // Sample rate
+                wavDataView.setUint32(24, sampleRate, true);
+                // Byte rate (sample rate * block align)
+                wavDataView.setUint32(28, sampleRate * numOfChannels * 2, true);
+                // Block align (channel count * bytes per sample)
+                wavDataView.setUint16(32, numOfChannels * 2, true);
+                // Bits per sample
+                wavDataView.setUint16(34, 16, true);
+                // Data chunk identifier
+                writeString(wavDataView, 36, 'data');
+                // Data chunk length
+                wavDataView.setUint32(40, length, true);
+                
+                // Write the PCM samples
+                const channelData = [];
+                for (let i = 0; i < numOfChannels; i++) {
+                    channelData.push(buffer.getChannelData(i));
+                }
+                
+                let offset = 44;
+                for (let i = 0; i < buffer.length; i++) {
+                    for (let channel = 0; channel < numOfChannels; channel++) {
+                        const sample = Math.max(-1, Math.min(1, channelData[channel][i]));
+                        wavDataView.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+                        offset += 2;
+                    }
+                }
+                
+                return new Blob([wavDataView], { type: 'audio/wav' });
+            }
+            
+            // Helper function to write a string to a DataView
+            function writeString(dataView, offset, string) {
+                for (let i = 0; i < string.length; i++) {
+                    dataView.setUint8(offset + i, string.charCodeAt(i));
+                }
+            }
+            
+            // Download the recorded audio
+            function downloadAudio() {
+                if (!audioUrl) return;
+                
+                const effectSuffix = currentEffect !== 'normal' ? `-${currentEffect}` : '';
+                const filename = `recording${effectSuffix}-${new Date().toISOString().slice(0, 10)}.wav`;
+                
+                const a = document.createElement('a');
+                a.href = audioUrl;
+                a.download = filename;
+                a.click();
+            }
+            
+            // Event listeners
+            recordButton.addEventListener('click', startRecording);
+            stopButton.addEventListener('click', stopRecording);
+            playButton.addEventListener('click', playAudio);
+            downloadButton.addEventListener('click', downloadAudio);
+            
+            // Effect buttons
+            effectButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const effect = button.getAttribute('data-effect');
+                    currentEffect = effect;
+                    
+                    // Update active state
+                    effectButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Apply effect if audio exists
+                    if (audio) {
+                        applyEffect(effect);
+                    }
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9683e22615f25717',t:'MTc1NDAzNjA4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
