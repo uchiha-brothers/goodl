@@ -37,7 +37,7 @@
           "name": "Upscale Image",
           "desc": "See the list of supported AI models here: https://mind.hydrooo.web.id",
           "path": "/ai/upscale",
-          "status": "error",
+          "status": "ready",
           "params": {
             "url": "put url for luminai to respond to"
           }
