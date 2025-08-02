@@ -34,6 +34,15 @@
           }
         },
         {
+          "name": "Upscale Image",
+          "desc": "See the list of supported AI models here: https://mind.hydrooo.web.id",
+          "path": "/ai/upscale",
+          "status": "error",
+          "params": {
+            "url": "put url for luminai to respond to"
+          }
+        },
+        {
           "name": "JerryTTS",
           "desc": "Translate & detect language using JerryCoder TTS API",
           "path": "/ai/tts?text=&lang=",
