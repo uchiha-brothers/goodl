@@ -1,11 +1,8 @@
-{
-  "copyright": "© 2025 JerryCoder • Telegram: https://t.me/oggy_workshop",
-  "notifications": [
-    {
-      "id": "#01",
-      "date": "2025-06-15",
-      "title": "Update Display API!",
-      "message": "Now there is a new update from JerryCoder API, please check the information on our Telegram channel."
-    }
-  ]
-}
+[
+  {
+    "id": "#01",
+    "date": "2025-06-15",
+    "title": "Update Display API!", 
+    "message": "New api added on JerryCoder API, please check the information on our Telegram channel."
+  }
+]
