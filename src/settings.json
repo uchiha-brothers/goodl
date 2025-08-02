@@ -34,14 +34,14 @@
           }
         },
         {
-          "name": "Upscale Image",
-          "desc": "See the list of supported AI models here: https://mind.hydrooo.web.id",
-          "path": "/ai/upscale",
-          "status": "ready",
-          "params": {
-            "url": "put url for luminai to respond to"
-          }
-        },
+  "name": "Upscale Image",
+  "desc": "Upscale a given image using AI",
+  "path": "/ai/upscale?image=",
+  "status": "ready",
+  "params": {
+    "image": "URL of the image you want to upscale"
+  } 
+     },
         {
           "name": "JerryTTS",
           "desc": "Translate & detect language using JerryCoder TTS API",
