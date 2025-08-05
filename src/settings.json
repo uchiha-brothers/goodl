@@ -35,13 +35,15 @@
         },
         {
   "name": "Upscale Image",
-  "desc": "Upscale a given image using AI",
+  "desc": "Upscale a given image using AI and return the upscaled image directly (not JSON)",
   "path": "/ai/upscale?image=",
   "status": "ready",
   "params": {
-    "image": "URL of the image you want to upscale"
-  } 
-     },
+    "image": "URL of the image you want to upscale (must be a direct image link)"
+  },
+  "returns": "Upscaled image as binary (JPEG/PNG/WebP), with headers: Content-Type and Content-Disposition",
+  "example": "/ai/upscale?image=https://ar-hosting.pages.dev/1754420135228.jpg"
+        }
         {
           "name": "JerryTTS",
           "desc": "Translate & detect language using JerryCoder TTS API",
