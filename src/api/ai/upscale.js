@@ -1,38 +1,25 @@
 const axios = require('axios');
 
-module.exports = function (app) {
-  app.get('/ai/upscale', async (req, res) => {
-    try {
-      const { image } = req.query;
+module.exports = function(app) {
 
-      if (!image) {
-        return res.status(400).json({
-          status: false,
-          error: 'Image URL is required : JerryCoder'
-        });
-      }
+    app.get('/ai/upscale', async (req, res) => {
+        try {
+            const { image } = req.query;
+            if (!image) {
+                return res.status(400).json({ status: false, error: 'Image URL is required  : JerryCoder'});
+            }
 
-      // Step 1: Get upscaled image URL from jerryc API
-      const apiUrl = `https://jerrycoder.oggyapi.workers.dev/jerryc?img=${encodeURIComponent(image)}`;
-      const apiResponse = await axios.get(apiUrl);
+            const upscaleUrl = `https://jerrycoder.oggyapi.workers.dev/jerryc?img=${encodeURIComponent(image)}`;
 
-      const imageUrl = apiResponse.data?.url;
-      if (!imageUrl) {
-        return res.status(500).json({ status: false, error: 'Upscaled image URL not found' });
-      }
+            const response = await axios.get(upscaleUrl, { responseType: 'arraybuffer' });
 
-      // Step 2: Fetch the image itself from the returned URL
-      const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+            // Set headers to return the image directly
+            res.set('Content-Type', response.headers['content-type']);
+            res.send(response.data);
 
-      res.setHeader('Content-Type', imageResponse.headers['content-type'] || 'image/jpeg');
-      res.setHeader('Content-Disposition', 'inline; filename="JerryCoder-upscaleimage.jpg"');
-      res.send(imageResponse.data);
+        } catch (error) {
+            res.status(500).json({ status: false, error: error.message });
+        }
+    });
 
-    } catch (error) {
-      res.status(500).json({
-        status: false,
-        error: error.message || 'Unknown error'
-      });
-    }
-  });
 };
