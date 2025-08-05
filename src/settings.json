@@ -43,7 +43,7 @@
   },
   "returns": "Upscaled image as binary (JPEG/PNG/WebP), with headers: Content-Type and Content-Disposition",
   "example": "/ai/upscale?image=https://ar-hosting.pages.dev/1754420135228.jpg"
-        }
+        },
         {
           "name": "JerryTTS",
           "desc": "Translate & detect language using JerryCoder TTS API",
